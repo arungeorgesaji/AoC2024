@@ -4,8 +4,8 @@ using namespace std;
 int main() {
 
     ifstream f("input.txt");
-    multiset<int> nums1;
-    multiset<int> nums2;
+    unordered_multiset<int> nums1;
+    unordered_multiset<int> nums2;
 
     if (!f.is_open()) {
         cerr << "Error opening the file!";
@@ -29,17 +29,15 @@ int main() {
     }
     
     auto it1 = nums1.begin();
-    auto it2 = nums2.begin();
 
-    int sum = 0;
+    int score = 0;
 
-    while (it1 != nums1.end() && it2 != nums2.end()){
-        sum += abs(*it1 - *it2); 
+    while (it1 != nums1.end()){
+        score += *it1 * nums2.count(*it1); 
         it1++;
-        it2++;
     }
 
-    cout << sum << endl;
+    cout << score << endl;
 
     f.close();
     return 0;
